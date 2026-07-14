@@ -1,0 +1,2 @@
+import { Router } from 'express'; import * as c from '../controllers/companyController.js'; import { protect, authorize } from '../middleware/auth.js'; import { upload } from '../middleware/upload.js';
+const router = Router(); router.get('/', c.listCompanies); router.post('/', protect, authorize('recruiter', 'admin'), c.createCompany); router.put('/:id', protect, authorize('recruiter', 'admin'), upload.single('logo'), c.updateCompany); router.delete('/:id', protect, authorize('recruiter', 'admin'), c.deleteCompany); export default router;

@@ -1,0 +1,2 @@
+import 'dotenv/config'; import app from './app.js'; import { connectDatabase } from './config/db.js';
+const start = async () => { await connectDatabase(); const server = app.listen(process.env.PORT || 5000, () => console.log(`API listening on port ${process.env.PORT || 5000}`)); const stop = () => server.close(() => process.exit(0)); process.on('SIGTERM', stop); process.on('SIGINT', stop); }; start().catch((error) => { console.error('Failed to start server:', error.message); process.exit(1); });

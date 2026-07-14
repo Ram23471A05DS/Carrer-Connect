@@ -1,0 +1,3 @@
+import mongoose from 'mongoose';
+const schema = new mongoose.Schema({ application: { type: mongoose.Schema.Types.ObjectId, ref: 'Application', required: true, index: true }, scheduledBy: { type: mongoose.Schema.Types.ObjectId, ref: 'User', required: true }, scheduledAt: { type: Date, required: true }, durationMinutes: { type: Number, default: 30 }, mode: { type: String, enum: ['video', 'phone', 'onsite'], required: true }, meetingLink: String, notes: String, status: { type: String, enum: ['scheduled', 'completed', 'cancelled'], default: 'scheduled' } }, { timestamps: true });
+export default mongoose.model('Interview', schema);

@@ -1,0 +1,2 @@
+import { Readable } from 'stream'; import cloudinary from '../config/cloudinary.js'; import { ApiError } from '../utils/apiError.js';
+export const uploadBuffer = (buffer, folder, resource_type = 'auto') => new Promise((resolve, reject) => { if (!process.env.CLOUDINARY_CLOUD_NAME) return reject(new ApiError(503, 'File uploads are not configured')); const stream = cloudinary.uploader.upload_stream({ folder, resource_type }, (error, result) => error ? reject(error) : resolve({ url: result.secure_url, publicId: result.public_id })); Readable.from(buffer).pipe(stream); });

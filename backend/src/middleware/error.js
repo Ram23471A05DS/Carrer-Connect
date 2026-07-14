@@ -1,0 +1,2 @@
+export const notFound = (req, _res, next) => next(Object.assign(new Error(`Route not found: ${req.method} ${req.originalUrl}`), { statusCode: 404 }));
+export const errorHandler = (err, _req, res, _next) => { const status = err.statusCode || (err.name === 'ValidationError' ? 400 : err.code === 11000 ? 409 : 500); if (status >= 500) console.error(err); res.status(status).json({ success: false, message: err.message || 'Internal server error', ...(err.details && { errors: err.details }) }); };
